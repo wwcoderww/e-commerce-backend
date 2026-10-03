@@ -1,3 +1,4 @@
+import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
 export const productsTable = pgTable("products", {
@@ -9,3 +10,6 @@ export const productsTable = pgTable("products", {
   category: varchar({ length: 255 }),
   rating: integer(),
 });
+
+export type Product = InferSelectModel<typeof productsTable>;
+export type NewProduct = InferInsertModel<typeof productsTable>;
