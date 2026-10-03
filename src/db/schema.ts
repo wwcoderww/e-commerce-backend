@@ -1,0 +1,11 @@
+import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+
+export const productTable = pgTable("products", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar({ length: 255 }).notNull(),
+  price: integer().notNull(),
+  description: varchar({ length: 255 }),
+  image: varchar({ length: 255 }),
+  category: varchar({ length: 255 }),
+  rating: integer(),
+});
