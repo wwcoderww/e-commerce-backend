@@ -4,6 +4,6 @@ import { putAllProducts, readAllProducts } from "./products.controller.js";
 const router = Router();
 
 router.get("/", readAllProducts);
-router.put("/", putAllProducts);
+router.post("/", putAllProducts);
 
 export { router as productsRouter };
