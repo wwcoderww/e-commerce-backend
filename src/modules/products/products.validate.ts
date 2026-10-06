@@ -16,5 +16,5 @@ export const updateProductScheme = z.object({
   category: z.string().optional(),
   rating: z.coerce.number().optional(),
   ratingCount: z.coerce.number().optional(),
-  createdAt: z.date(),
+  createdAt: z.string(),
 });
