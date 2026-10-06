@@ -49,8 +49,9 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   try {
     const updatedItem = req.body;
+    const updatedID = Number(req.params.id);
     console.log(req.body);
-    const result = await ProductsService.update(updatedItem);
+    const result = await ProductsService.update(updatedItem, updatedID);
     console.log(result);
     // Check if ran sucessfully
     if (result.length === 0) {

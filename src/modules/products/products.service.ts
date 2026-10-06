@@ -18,11 +18,11 @@ export const ProductsService = {
       .returning();
   },
 
-  async update(data: Product) {
+  async update(data: Product, id: number) {
     return await db
       .update(productsTable)
       .set(data)
-      .where(eq(productsTable.id, data.id))
+      .where(eq(productsTable.id, id))
       .returning();
   },
 };
