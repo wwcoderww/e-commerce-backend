@@ -11,7 +11,7 @@ app.use(
     origin: [
       "http://localhost:3000", // For local development
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   }),
 );
