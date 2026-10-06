@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
-import { NewProduct, productsTable } from "../../db/schema.js";
+import { NewProduct, Product, productsTable } from "../../db/schema.js";
 
 export const ProductsService = {
   async read() {
@@ -15,6 +15,14 @@ export const ProductsService = {
     return await db
       .delete(productsTable)
       .where(eq(productsTable.id, id))
+      .returning();
+  },
+
+  async update(data: Product) {
+    return await db
+      .update(productsTable)
+      .set(data)
+      .where(eq(productsTable.id, data.id))
       .returning();
   },
 };

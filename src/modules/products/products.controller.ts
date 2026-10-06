@@ -45,3 +45,15 @@ export const deleteProduct = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const updatedItem = req.body;
+    const result = await ProductsService.update(updatedItem);
+    console.log(result);
+    return res.status(200).json({ status: "success", data: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
