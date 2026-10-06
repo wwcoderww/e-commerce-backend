@@ -49,8 +49,16 @@ export const deleteProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   try {
     const updatedItem = req.body;
+    console.log(req.body);
     const result = await ProductsService.update(updatedItem);
     console.log(result);
+    // Check if ran sucessfully
+    if (result.length === 0) {
+      return res
+        .status(404)
+        .json({ status: "fail", message: "No matching ID" });
+    }
+    // On sucess
     return res.status(200).json({ status: "success", data: result });
   } catch (error) {
     console.log(error);
