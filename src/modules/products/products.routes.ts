@@ -7,5 +7,6 @@ const router = Router();
 
 router.get("/", readAllProducts);
 router.post("/", validate(createProductScheme), putAllProducts);
+router.delete("/:id");
 
 export { router as productsRouter };

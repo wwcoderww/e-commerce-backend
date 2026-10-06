@@ -1,14 +1,20 @@
+import { eq } from "drizzle-orm";
 import { db } from "../../db/index.js";
 import { NewProduct, productsTable } from "../../db/schema.js";
 
 export const ProductsService = {
   async read() {
-    const allProducts = await db.select().from(productsTable);
-    return allProducts;
+    return await db.select().from(productsTable);
   },
 
   async create(data: NewProduct) {
-    const [result] = await db.insert(productsTable).values(data).returning();
-    return result;
+    return await db.insert(productsTable).values(data).returning();
+  },
+
+  async delete(id: number) {
+    return await db
+      .delete(productsTable)
+      .where(eq(productsTable.id, id))
+      .returning();
   },
 };

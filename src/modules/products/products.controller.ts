@@ -33,3 +33,15 @@ export const putAllProducts = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const deleteID = Number(req.params.id);
+    const result = await ProductsService.delete(deleteID);
+    console.log(result);
+    return res.status(200).json({ status: "success" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
