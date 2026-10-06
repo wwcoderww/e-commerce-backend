@@ -17,7 +17,7 @@ export const putAllProducts = async (req: Request, res: Response) => {
     res.status(200).json({ sucess: true, data });
   } catch (error: any) {
     // If name is unique
-    if (error.code === "23505") {
+    if (error.cause.code === "23505") {
       return res.status(400).json({
         status: "fail",
         errors: [
