@@ -6,6 +6,9 @@ export const createProductScheme = z.object({
   description: z.string().optional(),
   image: z.string().optional(),
   category: z.string().optional(),
+  rating: z.coerce.number().optional(),
+  ratingCount: z.coerce.number().optional(),
+  createdAt: z.string().optional(),
 });
 
 export const updateProductScheme = z.object({
