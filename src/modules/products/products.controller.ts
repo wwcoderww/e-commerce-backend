@@ -50,17 +50,17 @@ export const putProduct = async (req: Request, res: Response) => {
   try {
     const updatedItem = req.body;
     const updatedID = Number(req.params.id);
-    // Make new item if no ID
-    if (!updatedID) return postProduct(req, res);
     console.log(req.body);
     const result = await ProductsService.update(updatedItem, updatedID);
     console.log(result);
+    // If no matching ID POST
+    if (result.length === 0) return postProduct(req, res);
     // Check if ran sucessfully
-    if (result.length === 0) {
-      return res
-        .status(404)
-        .json({ status: "fail", message: "No matching ID" });
-    }
+    // if (result.length === 0) {
+    //   return res
+    //     .status(404)
+    //     .json({ status: "fail", message: "No matching ID" });
+    // }
     // On sucess
     return res.status(200).json({ status: "success", data: result });
   } catch (error) {
