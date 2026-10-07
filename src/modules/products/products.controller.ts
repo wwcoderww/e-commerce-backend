@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ProductsService } from "./products.service.js";
 
-export const readAllProducts = async (req: Request, res: Response) => {
+export const getAllProducts = async (req: Request, res: Response) => {
   try {
     const allProducts = await ProductsService.read();
     res.status(200).json(allProducts);
@@ -11,7 +11,7 @@ export const readAllProducts = async (req: Request, res: Response) => {
   }
 };
 
-export const putProduct = async (req: Request, res: Response) => {
+export const postProduct = async (req: Request, res: Response) => {
   try {
     const data = await ProductsService.create(req.body);
     return res.status(200).json({ sucess: true, data });
@@ -46,12 +46,12 @@ export const deleteProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const updateProduct = async (req: Request, res: Response) => {
+export const putProduct = async (req: Request, res: Response) => {
   try {
     const updatedItem = req.body;
     const updatedID = Number(req.params.id);
     // Make new item if no ID
-    if (!updatedID) return putProduct(req, res);
+    if (!updatedID) return postProduct(req, res);
     console.log(req.body);
     const result = await ProductsService.update(updatedItem, updatedID);
     console.log(result);
