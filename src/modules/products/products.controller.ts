@@ -51,7 +51,7 @@ export const updateProduct = async (req: Request, res: Response) => {
     const updatedItem = req.body;
     const updatedID = Number(req.params.id);
     // Make new item if no ID
-    if (!updatedID) putProduct(req, res);
+    if (!updatedID) return putProduct(req, res);
     console.log(req.body);
     const result = await ProductsService.update(updatedItem, updatedID);
     console.log(result);
