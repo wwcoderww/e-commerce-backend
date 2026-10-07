@@ -33,6 +33,7 @@ export const postProduct = async (req: Request, res: Response) => {
     }
   }
 };
+1;
 
 export const deleteProduct = async (req: Request, res: Response) => {
   try {

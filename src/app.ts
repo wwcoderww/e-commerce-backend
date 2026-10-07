@@ -1,6 +1,8 @@
 import express from "express";
 import { productsRouter } from "./modules/products/products.routes.js";
 import cors from "cors";
+import { auth } from "./lib/auth.js";
+import { toNodeHandler } from "better-auth/node";
 // Variables
 const app = express();
 // Middlewares
@@ -17,5 +19,7 @@ app.use(
 );
 
 app.use("/api/products", productsRouter);
-
+app.use("/api/auth/*", (req, res) => {
+  return toNodeHandler(auth)(req, res);
+});
 export default app;
