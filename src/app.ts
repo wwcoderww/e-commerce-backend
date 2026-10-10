@@ -1,5 +1,5 @@
 import express from "express";
-import { productsRouter } from "./modules/products/products.routes.js";
+import { productsRouter } from "./routes/productsRoutes.js";
 import cors from "cors";
 import { auth } from "./lib/auth.js";
 import { toNodeHandler } from "better-auth/node";

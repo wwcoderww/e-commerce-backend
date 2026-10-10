@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import { db } from "../../db/index.js";
-import { NewProduct, Product, productsTable } from "../../db/schema.js";
+import { db } from "../db/index.js";
+import { NewProduct, Product, productsTable } from "../db/schema/products.js";
 
 export const ProductsService = {
   async read() {

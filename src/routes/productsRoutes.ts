@@ -4,12 +4,12 @@ import {
   postProduct,
   getAllProducts,
   putProduct,
-} from "./products.controller.js";
+} from "../controllers/productsController.js";
 import {
   createProductScheme,
   updateProductScheme,
-} from "./products.validate.js";
-import { validate } from "../../middleware/validate.js";
+} from "../validators/productsScheme.js";
+import { validate } from "../middleware/validate.js";
 
 const router = Router();
 
