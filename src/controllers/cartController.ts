@@ -22,7 +22,7 @@ export async function getCartById(req: Request, res: Response) {
 
 export async function putCart(req: Request, res: Response) {
   try {
-    const data = await Cart.addOne(req.body);
+    const data = await Cart.update(req.body);
     return res.status(200).json({ success: true, data });
   } catch (error: any) {
     console.log(error);

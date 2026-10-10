@@ -14,10 +14,10 @@ export const Cart = {
     return await db.insert(cartItemsTable).values(data).returning();
   },
 
-  async addOne(data: CartItem) {
+  async update(data: CartItem) {
     return await db
       .update(cartItemsTable)
-      .set({ quantity: sql`${cartItemsTable.quantity} + 1` })
+      .set({ quantity: sql`${cartItemsTable.quantity} + ${data.quantity}` })
       .where(
         and(
           eq(cartItemsTable.userId, data.userId),

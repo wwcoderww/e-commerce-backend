@@ -11,7 +11,8 @@ Content-Type: application/json
 
 {
     "userId": "4GWQpWwDGAPE18GQ6gABZvauNRSxFlY8",
-    "productId": 24
+    "productId": 24,
+    "quantity": -1
 }
 
 ### Render - GET All Products
