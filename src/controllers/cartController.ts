@@ -21,3 +21,15 @@ export async function getCartById(req: Request, res: Response) {
       .json({ success: "fail", error: "Internal server error" });
   }
 }
+
+export async function postCart(req: Request, res: Response) {
+  try {
+    const result = await Cart.create(req.body);
+    return res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ success: "fail", error: "Internal server error" });
+  }
+}
