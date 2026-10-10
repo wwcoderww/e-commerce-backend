@@ -4,6 +4,16 @@
 GET {{baseUrl}}/api/cart/4GWQpWwDGAPE18GQ6gABZvauNRSxFlY8
 Accept: application/json
 
+### Render - POST CART Item
+PUT {{baseUrl}}/api/cart
+Accept: application/json
+Content-Type: application/json
+
+{
+    "userId": "4GWQpWwDGAPE18GQ6gABZvauNRSxFlY8",
+    "productId": 24
+}
+
 ### Render - GET All Products
 GET https://e-commerce-backend-wnhs.onrender.com/api/products
 Accept: application/json

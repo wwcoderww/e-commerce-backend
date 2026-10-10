@@ -14,11 +14,19 @@ export async function getCartById(req: Request, res: Response) {
         .json({ success: "fail", error: "No items found matching ID" });
     // Items found
     return res.status(200).json({ success: "success", data: results });
-  } catch (err) {
-    console.log(err);
-    return res
-      .status(500)
-      .json({ success: "fail", error: "Internal server error" });
+  } catch (error: any) {
+    console.log(error);
+    return res.status(500).json({ success: "fail", error: error?.message });
+  }
+}
+
+export async function putCart(req: Request, res: Response) {
+  try {
+    const data = await Cart.addOne(req.body);
+    return res.status(200).json({ success: true, data });
+  } catch (error: any) {
+    console.log(error);
+    return res.status(500).json({ success: "fail", error: error?.message });
   }
 }
 
@@ -26,10 +34,9 @@ export async function postCart(req: Request, res: Response) {
   try {
     const result = await Cart.create(req.body);
     return res.status(200).json({ success: true, data: result });
-  } catch (error) {
+  } catch (error: any) {
+    if (error.message.code === "23505") return putCart(req, res);
     console.log(error);
-    return res
-      .status(500)
-      .json({ success: "fail", error: "Internal server error" });
+    return res.status(500).json({ success: "fail", error: error?.message });
   }
 }
