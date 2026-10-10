@@ -1,0 +1,10 @@
+@baseUrl = https://e-commerce-backend-wnhs.onrender.com
+
+### Render - GET CART Admin user
+GET {{baseUrl}}/api/cart/4GWQpWwDGAPE18GQ6gABZvauNRSxFlY8
+Accept: application/json
+
+### Render - GET All Products
+GET https://e-commerce-backend-wnhs.onrender.com/api/products
+Accept: application/json
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36

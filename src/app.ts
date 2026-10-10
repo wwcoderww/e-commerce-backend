@@ -3,6 +3,7 @@ import { productsRouter } from "./routes/productsRoutes.js";
 import cors from "cors";
 import { auth } from "./lib/auth.js";
 import { toNodeHandler } from "better-auth/node";
+import { cartRouter } from "./routes/cartRoute.js";
 const app = express();
 app.set("trust proxy", true);
 // Middlewares
@@ -24,5 +25,6 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/products", productsRouter);
+app.use("/api/cart", cartRouter);
 
 export default app;
