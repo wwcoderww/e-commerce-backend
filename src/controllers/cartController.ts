@@ -40,3 +40,12 @@ export async function postCart(req: Request, res: Response) {
     return res.status(500).json({ success: "fail", error: error?.message });
   }
 }
+
+export async function deleteCart(req: Request, res: Response) {
+  try {
+    const data = await Cart.delete(req.body);
+    return res.status(200).json({ success: "success", data });
+  } catch (error: any) {
+    return res.status(500).json({ success: "fail", error: error?.message });
+  }
+}

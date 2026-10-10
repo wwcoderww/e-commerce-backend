@@ -26,4 +26,16 @@ export const Cart = {
       )
       .returning();
   },
+
+  async delete(data: CartItem) {
+    return await db
+      .delete(cartItemsTable)
+      .where(
+        and(
+          eq(cartItemsTable.userId, data.userId),
+          eq(cartItemsTable.productId, data.productId),
+        ),
+      )
+      .returning();
+  },
 };

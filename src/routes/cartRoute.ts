@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  deleteCart,
   getCartById,
   postCart,
   putCart,
@@ -10,5 +11,6 @@ const router = Router();
 router.get("/:id", getCartById);
 router.post("/", postCart);
 router.put("/", putCart);
+router.delete("/", deleteCart);
 
 export { router as cartRouter };
