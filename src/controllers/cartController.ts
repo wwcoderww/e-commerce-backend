@@ -35,7 +35,10 @@ export async function postCart(req: Request, res: Response) {
     const result = await Cart.create(req.body);
     return res.status(200).json({ success: true, data: result });
   } catch (error: any) {
-    if (error.message.code === "23505") return putCart(req, res);
+    if (error.cause.code === "23505") {
+      req.body = { ...req.body, quantity: 1 };
+      return putCart(req, res);
+    }
     console.log(error);
     return res.status(500).json({ success: "fail", error: error?.message });
   }

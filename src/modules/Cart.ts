@@ -9,11 +9,11 @@ export const Cart = {
       .from(cartItemsTable)
       .where(eq(cartItemsTable.userId, id));
   },
-
+  // POST
   async create(data: NewCartItem) {
     return await db.insert(cartItemsTable).values(data).returning();
   },
-
+  // PUT
   async update(data: CartItem) {
     return await db
       .update(cartItemsTable)
