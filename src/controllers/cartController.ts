@@ -21,8 +21,9 @@ export async function getCartById(req: Request, res: Response) {
 }
 
 export async function putCart(req: Request, res: Response) {
+  const { userId, productId, quantity } = req.body;
   try {
-    const data = await Cart.update(req.body);
+    const data = await Cart.update(userId, productId, quantity);
     return res.status(200).json({ success: true, data });
   } catch (error: any) {
     console.log(error);
@@ -31,8 +32,9 @@ export async function putCart(req: Request, res: Response) {
 }
 
 export async function postCart(req: Request, res: Response) {
+  const { userId, productId } = req.body;
   try {
-    const result = await Cart.create(req.body);
+    const result = await Cart.create(userId, productId);
     return res.status(200).json({ success: true, data: result });
   } catch (error: any) {
     if (error.cause.code === "23505") {
@@ -45,8 +47,9 @@ export async function postCart(req: Request, res: Response) {
 }
 
 export async function deleteCart(req: Request, res: Response) {
+  const { userId, productId } = req.body;
   try {
-    const data = await Cart.delete(req.body);
+    const data = await Cart.delete(userId, productId);
     return res.status(200).json({ success: "success", data });
   } catch (error: any) {
     return res.status(500).json({ success: "fail", error: error?.message });

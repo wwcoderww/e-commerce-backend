@@ -10,32 +10,31 @@ export const Cart = {
       .where(eq(cartItemsTable.userId, id));
   },
   // POST
-  async create(data: NewCartItem) {
-    return await db.insert(cartItemsTable).values(data).returning();
+  async create(userId: string, productId: number) {
+    return await db.insert(cartItemsTable).values({ userId, productId }).returning();
   },
   // PUT
-  async update(data: CartItem) {
+  async update(userId: string, productId: number, quantity: number = 1) {
     return await db
       .update(cartItemsTable)
-      .set({ quantity: sql`${cartItemsTable.quantity} + ${data.quantity}` })
+      .set({ quantity: sql`${cartItemsTable.quantity} + ${quantity}` })
       .where(
         and(
-          eq(cartItemsTable.userId, data.userId),
-          eq(cartItemsTable.productId, data.productId),
+          eq(cartItemsTable.userId, userId),
+          eq(cartItemsTable.productId, productId),
         ),
       )
       .returning();
   },
 
-  async delete(data: CartItem) {
+  async delete(userId: string, productId: number) {
     return await db
       .delete(cartItemsTable)
       .where(
         and(
-          eq(cartItemsTable.userId, data.userId),
-          eq(cartItemsTable.productId, data.productId),
+          eq(cartItemsTable.userId, userId),
+          eq(cartItemsTable.productId, productId),
         ),
-      )
-      .returning();
+      );
   },
 };
