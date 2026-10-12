@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Cart } from "../modules/Cart.js";
 
-export async function getCartById(req: Request, res: Response) {
+export async function getCartById(req: Request, res: Response): Promise<any> {
   try {
     const reqId = Array.isArray(req.params.id)
       ? req.params.id[0]
@@ -20,10 +20,11 @@ export async function getCartById(req: Request, res: Response) {
   }
 }
 
-export async function putCart(req: Request, res: Response) {
+export async function putCart(req: Request, res: Response): Promise<any> {
   const { userId, productId, quantity } = req.body;
   try {
     const data = await Cart.update(userId, productId, quantity);
+    if (data.length === 0) return postCart(req, res);
     return res.status(200).json({ success: true, data });
   } catch (error: any) {
     console.log(error);
@@ -31,26 +32,24 @@ export async function putCart(req: Request, res: Response) {
   }
 }
 
-export async function postCart(req: Request, res: Response) {
+export async function postCart(req: Request, res: Response): Promise<any> {
   const { userId, productId } = req.body;
   try {
     const result = await Cart.create(userId, productId);
     return res.status(200).json({ success: true, data: result });
   } catch (error: any) {
-    if (error.cause.code === "23505") {
-      req.body = { ...req.body, quantity: 1 };
-      return putCart(req, res);
-    }
+    if (error.cause.code === "23505") return putCart(req, res);
+
     console.log(error);
     return res.status(500).json({ success: "fail", error: error?.message });
   }
 }
 
-export async function deleteCart(req: Request, res: Response) {
+export async function deleteCart(req: Request, res: Response): Promise<any> {
   const { userId, productId } = req.body;
   try {
     const data = await Cart.delete(userId, productId);
-    return res.status(200).json({ success: "success", data });
+    return res.status(200).json({ success: "success" });
   } catch (error: any) {
     return res.status(500).json({ success: "fail", error: error?.message });
   }
