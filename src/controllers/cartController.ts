@@ -25,6 +25,7 @@ export async function putCart(req: Request, res: Response): Promise<any> {
   try {
     const data = await Cart.update(userId, productId, quantity);
     if (data.length === 0) return postCart(req, res);
+    if (data[0].quantity <= 0) return deleteCart(req, res);
     return res.status(200).json({ success: true, data });
   } catch (error: any) {
     console.log(error);
